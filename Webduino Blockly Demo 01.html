@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://bit.webduino.io/blockly/live-preview.html#-MV4O-eRLH9uXDgt6A7W -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Webduino Blockly Demo 01</title>
+  <script src="./Webduino Blockly Demo 01_files/jquery.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 01_files/webduino-all.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 01_files/MessageTransport.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 01_files/webduino-blockly.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 01_files/firebase.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 01_files/runtime.min.js.下載"></script><script src="./Webduino Blockly Demo 01_files/BitLedMatrix-blockly.js.下載"></script><script src="./Webduino Blockly Demo 01_files/BitLedMatrix.js.下載"></script><script src="./Webduino Blockly Demo 01_files/BitPhotocell-blockly.js.下載"></script>
+
+  <style>#demo-area-01-show { font-size: 60px; pointer-events: auto!important; }</style>
+</head>
+
+<body>
+  <div><span id="demo-area-01-show">0.926007326007326</span></div>
+
+  <script>var matrix;
+var photocell;
+
+
+boardReady({board: 'Bit', device: 'bY4cjyhepiwAhJkUyL', transport: 'mqtt'}, function (board) {
+  board.samplingInterval = 250;
+  matrix = getMatrix(board, 4, 25);
+  photocell = getPhotocell(board, 0);
+  photocell.measure(function (val){
+    photocell.detectedVal = val;
+    if (photocell.detectedVal < 0.5) {
+      matrix.setColor('#ff0000');
+    }
+    if (photocell.detectedVal > 0.5) {
+      matrix.setColor('#000000');
+    }
+    document.getElementById("demo-area-01-show").innerHTML = photocell.detectedVal;
+  });
+});
+</script>
+
+
+</body></html>
